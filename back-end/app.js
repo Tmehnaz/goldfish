@@ -1,17 +1,17 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const urlRoute = require('./createShortUrl');
+const urlRoute = require('./back-end/createShortUrl');
 
-const uri = 'mongodb://localhost:27017/shortUrlDB';
+const mongoDBConnection = 'mongodb://localhost:27017/shortUrlDB';
 
-mongoose.connect(uri, ()=> {
+mongoose.connect(mongoDBConnection, ()=> {
     console.log("Connected to MongoDB")
 });
 app.use(express.json());
 
 
-app.use('api/longurl', urlRoute)
+app.use('/shortenID', urlRoute)
 
 
 const PORT = process.env.PORT || 5000;

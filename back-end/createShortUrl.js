@@ -1,11 +1,11 @@
 
-const express = require("express");
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 
 const URLdb = require('./shortUrlDB');
 const {nanoid} = require('nanoid');
 
-router.post('/api/shortenID', async (req,res)=> {
+router.post('/shortenID', async (req,res)=> {
 
     const {longUrl} = req.body;
     const shortID = nanoid(7);
@@ -16,7 +16,7 @@ router.post('/api/shortenID', async (req,res)=> {
     await URLdb.create({shortID, longUrl});
     res.json(shortUrl);
    } catch(error) {
-    console.error('Error' + err);
+    console.error('Error' + error);
     res.status(500).json(error + 'Internal Server error');
    }
 

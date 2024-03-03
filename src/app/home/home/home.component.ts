@@ -1,24 +1,25 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent {
   longUrl: any = {};
   shortUrl: any = {};
   
   ngOnInit(){
-    this.shortenUrl()
+    this.shortenUrl();
   }
   constructor(private http:HttpClient){ }
   
     
     shortenUrl(){
-      this.http.post<any>('http://localhost:4200/api/shortenID', { longUrl: this.longUrl }).subscribe({
-        next: (res)=> console.log(this.shortUrl)
+      this.http.post<any>('http://mongodb://localhost:27017/shortUrlDB/shortUrl', { longUrl: this.longUrl }).subscribe({
+        next: (res)=> this.shortUrl = res.shortUrl
+       
       }
       
          
