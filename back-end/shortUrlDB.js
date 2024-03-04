@@ -10,7 +10,7 @@ const shortUrlSchema = new mongoose.Schema({
         required: true
     },
     shortID:{
-        type: number,
+        type: String,
         required: true
     }
 });

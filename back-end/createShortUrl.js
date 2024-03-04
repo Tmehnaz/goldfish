@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const URLdb = require('./shortUrlDB');
+const URLdb = require('./back-end/shortUrlDB');
 const {nanoid} = require('nanoid');
 
 //creating shortID & mapping the longurl and shorturl
@@ -14,7 +14,7 @@ router.post('/shortenID', async (req,res)=> {
 
    try{
 
-    await URLdb.create({shortID, longUrl});
+    await URLdb.create({longUrl, shortUrl});
     res.json(shortUrl);
    } catch(error) {
     console.error('Error' + error);
@@ -23,9 +23,9 @@ router.post('/shortenID', async (req,res)=> {
 
 });
 router.get('/:shortID', async (req,res)=>{
-const {shortID} = req.params;
+const {shortUrl} = req.params;
 try{
-    const longUrl = await URLdb.findOne({shortID});
+    const longUrl = await URLdb.findOne({shortUrl});
     if(longUrl){
         res.redirect(shortUrl.longUrl)
     } else{

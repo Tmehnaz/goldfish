@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:url-shrotner": "node dist/url-shrotner/server/server.mjs"
+    "serve:ssr:url-shrotner": "node dist/url-shrotner/server/server.mjs",
+    "dev": "nodemon app.js"
   },
   "private": true,
   "dependencies": {

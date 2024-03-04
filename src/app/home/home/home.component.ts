@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit{
   
     
     shortenUrl(){
-      this.http.post<any>('http://localhost/4200/shortUrl', { longUrl: this.longUrl }).subscribe({
+      this.http.post<any>('http://localhost:5000/api/shortenID', { longUrl: this.longUrl }).subscribe({
         next: (response) =>{ 
-          this.shortUrl = response.shortenUrl;
+          this.shortUrl = response.shortUrl;
         },
         error: error => {
           console.log("Error Loading the Page:", error);
