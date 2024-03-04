@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit{
   
     
     shortenUrl(){
-      this.http.post<any>('http://mongodb://localhost:27017/shortUrlDB/shortUrl', { longUrl: this.longUrl }).subscribe({
+      this.http.post<any>('http://localhost/4200/shortUrl', { longUrl: this.longUrl }).subscribe({
         next: (response) =>{ 
           this.shortUrl = response.shortenUrl;
         },
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit{
           console.log("Error Loading the Page:", error);
         },
         complete: () => {
-          console.log("Request Completed Successfully");
+          console.log("Request Completed Successfully")
         }
 
 
