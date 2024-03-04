@@ -5,6 +5,7 @@ const router = express.Router();
 const URLdb = require('./shortUrlDB');
 const {nanoid} = require('nanoid');
 
+//creating shortID & mapping the longurl and shorturl
 router.post('/shortenID', async (req,res)=> {
 
     const {longUrl} = req.body;
