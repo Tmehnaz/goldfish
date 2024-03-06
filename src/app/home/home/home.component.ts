@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +9,22 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit{
   longUrl: any = {};
   shortUrl: any = {};
-  
-  ngOnInit(): void{
+
+  ngOninit(){
     this.shortenUrl();
-  }
+  } 
+  
+ 
   constructor(private http:HttpClient){ }
+  ngOnInit(): void {
+   this.shortenUrl()
+  }
   
     
     shortenUrl(){
-      this.http.post<any>('http://localhost:5000/api/shortenID', { longUrl: this.longUrl }).subscribe({
-        next: (response) =>{ 
-          this.shortUrl = response.shortUrl;
+     return this.http.post<any>('http://localhost:5000/api/shortenID', {longUrl: this.longUrl}).subscribe({
+        next: (res) =>{ 
+          this.shortUrl = res.shortUrl;
         },
         error: error => {
           console.log("Error Loading the Page:", error);
@@ -27,16 +32,11 @@ export class HomeComponent implements OnInit{
         complete: () => {
           console.log("Request Completed Successfully")
         }
-
-
        
       }
-      
          
-      );
-      
-  }
-   
+      );   
+  }  
 
   }
 
