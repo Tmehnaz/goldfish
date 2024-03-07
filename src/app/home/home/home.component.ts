@@ -4,7 +4,7 @@ import { Component, OnInit} from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
   longUrl: any = {};
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit{
   
     
     shortenUrl(){
-     return this.http.post<any>('http://localhost:5000/api/shortenID', {longUrl: this.longUrl}).subscribe({
+     return this.http.post<any>('http://localhost:5000/api/shortId', {longUrl: this.longUrl}).subscribe({
         next: (response) =>{ 
           this.shortUrl = response.shortUrl;
         },

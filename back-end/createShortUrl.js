@@ -8,7 +8,7 @@ const {nanoid} = require('nanoid');
 
 //POST request for creating short url
 
-router.post('/api/shortenID', async (req,res)=> {
+router.post('/api/shortId', async (req,res)=> {
     
     const {longUrl} = req.body;
     const shortId = nanoid(6);
@@ -18,7 +18,7 @@ router.post('/api/shortenID', async (req,res)=> {
 // created document in mongodb to map long url and short url
    try{
 
-    await ShortUrlDB.create({longUrl, shortUrl});
+    ((await ShortUrlDB.create({longUrl, shortUrl, shortId})).save());
     console.log("ShortUrl created successfully");
     res.json({shortUrl});   
     
@@ -31,11 +31,12 @@ router.post('/api/shortenID', async (req,res)=> {
 
 //GET request to redirect to the shrot url
 
-router.get('/shortenID/shortUrl', async (req,res)=>{
-const {shortUrl} = req.params;
+router.get('/:shortId', async (req,res)=>{
+const {shortId} = req.params;
 try{
-    const urlMapping = await ShortUrlDB.findOne({shortUrl});
+    const urlMapping = await ShortUrlDB.findOne({shortId});
     if(urlMapping){
+        console.log(`Redirected to ${urlMapping.longUrl}`);
         res.redirect(urlMapping.longUrl);
     } else{
         res.status(404).json({error:'Short Url not found'})

@@ -19,6 +19,8 @@ mongoose.connect(mongo_URI).then(() => {
     console.error('Error connecting to MongoDB:', error);
   });
 
+  
+
 app.use(cors());
 app.use(express.json());
 
