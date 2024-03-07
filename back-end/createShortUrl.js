@@ -8,7 +8,7 @@ const {nanoid} = require('nanoid');
 
 //POST request for creating short url
 
-router.post('/shortenID', async (req,res)=> {
+router.post('/api/shortenID', async (req,res)=> {
     
     const {longUrl} = req.body;
     const shortId = nanoid(6);
@@ -31,7 +31,7 @@ router.post('/shortenID', async (req,res)=> {
 
 //GET request to redirect to the shrot url
 
-router.get('/shortenID', async (req,res)=>{
+router.get('/shortenID/shortUrl', async (req,res)=>{
 const {shortUrl} = req.params;
 try{
     const urlMapping = await ShortUrlDB.findOne({shortUrl});

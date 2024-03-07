@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit{
     
     shortenUrl(){
      return this.http.post<any>('http://localhost:5000/api/shortenID', {longUrl: this.longUrl}).subscribe({
-        next: (res) =>{ 
-          this.shortUrl = res.shortUrl;
+        next: (response) =>{ 
+          this.shortUrl = response.shortUrl;
         },
         error: error => {
           console.log("Error while doing POST request:", error);
