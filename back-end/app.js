@@ -1,9 +1,12 @@
+
 require('dotenv').config();
 const express = require("express");
+
 const app = express();
 const cors = require('cors');
 const mongoose = require("mongoose");
-const urlRoute = require('./createShortUrl');
+const createShortUrl = require('./createShortUrl');
+
 
 
 const mongo_URI = process.env.URI;
@@ -18,8 +21,8 @@ mongoose.connect(mongo_URI).then(() => {
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', urlRoute);
-
+//Middleware function 
+app.use('/api', createShortUrl);
 
 
 const PORT = process.env.PORT || 5000;

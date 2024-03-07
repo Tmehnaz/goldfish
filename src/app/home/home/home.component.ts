@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit{
  
   constructor(private http:HttpClient){ }
   ngOnInit(): void {
-   this.shortenUrl()
+   this.shortenUrl();
+  //  this.retrieveShortUrl();
   }
   
     
@@ -27,16 +28,29 @@ export class HomeComponent implements OnInit{
           this.shortUrl = res.shortUrl;
         },
         error: error => {
-          console.log("Error Loading the Page:", error);
+          console.log("Error while doing POST request:", error);
         },
         complete: () => {
-          console.log("Request Completed Successfully")
+          console.log("Post Request Completed Successfully")
         }
        
       }
          
       );   
   }  
+  // retrieveShortUrl() {
+  //   return this.http.get<any>('http://localhost:5000/:shortID').subscribe({
+  //     next: (res) => {
+  //       this.shortUrl = res.shortUrl
+  //     },
+  //     error: error => {
+  //       console.log('Failed to retrieve shortUrl', error);
+  //     },
+  //     complete: () => {
+  //       console.log('Get Request Was Successful')
+  //     }
+  //   })
+  // }
 
   }
 

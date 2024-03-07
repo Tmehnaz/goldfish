@@ -2,41 +2,47 @@
 const express = require('express');
 const router = express.Router();
 
-const ShortUrlDB = require('./ShortUrlDB');
+const ShortUrlDB = require('./shortUrlDB');
 
-const { nanoid } = import('nanoid');
+const {nanoid} = require('nanoid');
 
-//creating shortID & mapping the longurl to shorturl
+//POST request for creating short url
+
 router.post('/shortenID', async (req,res)=> {
     
-     
     const {longUrl} = req.body;
-    const shortID = nanoid(7);
-    const shortUrl = shortID;
+    const shortId = nanoid(6);
+    const baseURL = req.protocol + '://' + req.get('host') + '/';
+    const shortUrl = baseURL + shortId;   
     
-
+// created document in mongodb to map long url and short url
    try{
 
     await ShortUrlDB.create({longUrl, shortUrl});
-    res.json({shortUrl});
+    console.log("ShortUrl created successfully");
+    res.json({shortUrl});   
+    
    } catch(error) {
-    console.error('Error' + error);
-    res.status(500).json(error + 'Internal Server error');
+    console.error('Error:', error);
+    res.status(500).json({error:'Internal Server error during post request'});
    }
 
 });
-router.get('/:shortID', async (req,res)=>{
+
+//GET request to redirect to the shrot url
+
+router.get('/shortenID', async (req,res)=>{
 const {shortUrl} = req.params;
 try{
-    const longUrl = await ShortUrlDBnoom.findOne({shortUrl});
-    if(longUrl){
-        res.redirect(shortUrl.longUrl)
+    const urlMapping = await ShortUrlDB.findOne({shortUrl});
+    if(urlMapping){
+        res.redirect(urlMapping.longUrl);
     } else{
-        res.status(404).json(error + 'Short Url not found')
+        res.status(404).json({error:'Short Url not found'})
     }
 }catch(error) {
-    console.error('error redirecting' + error);
-    res.status(500).json({error:'Internal Server error'})
+    console.error({error:'error redirecting'});
+    res.status(500).json({error:'Internal Server error during get request'});
 }
-})
+});
 module.exports = router; 

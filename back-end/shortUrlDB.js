@@ -8,10 +8,7 @@ const shortUrlSchema = new mongoose.Schema({
     shortUrl:{
         type: String,
         required: true
-    },
-    shortID:{
-        type: String,
-        required: true
     }
+   
 });
 module.exports = mongoose.model('ShortUrlDB', shortUrlSchema);
