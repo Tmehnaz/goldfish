@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit} from '@angular/core';
+import { ShorturlService } from '../../shorturl.service';
 
 @Component({
   selector: 'app-home',
@@ -7,23 +7,17 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  longUrl: any = {};
-  shortUrl: any = {};
-
-  ngOninit(){
-    this.shortenUrl();
-  } 
-  
+  longUrl: string='';
+  shortUrl: string = '';
  
-  constructor(private http:HttpClient){ }
+  constructor(private shorturlService: ShorturlService){ }
   ngOnInit(): void {
-   this.shortenUrl();
-  //  this.retrieveShortUrl();
+      
   }
   
-    
     shortenUrl(){
-     return this.http.post<any>('http://localhost:5000/api/shortId', {longUrl: this.longUrl}).subscribe({
+
+     this.shorturlService.shortenUrl(this.longUrl).subscribe({
         next: (response) =>{ 
           this.shortUrl = response.shortUrl;
         },
@@ -34,10 +28,14 @@ export class HomeComponent implements OnInit{
           console.log("Post Request Completed Successfully")
         }
        
-      }
+      })
          
-      );   
+      
   }  
+
+  
+}
+
   // retrieveShortUrl() {
   //   return this.http.get<any>('http://localhost:5000/:shortID').subscribe({
   //     next: (res) => {
@@ -51,9 +49,4 @@ export class HomeComponent implements OnInit{
   //     }
   //   })
   // }
-
-  }
-
-
-
 

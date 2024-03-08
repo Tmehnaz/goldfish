@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { HomeComponent } from './home/home/home.component';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +10,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'url-shrotner';
-}
+  
+  constructor() {}
+
+  shortenUrl(){
+    
+      }
+    
+  }
+
